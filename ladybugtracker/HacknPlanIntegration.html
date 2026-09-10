@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hackn Plan Integration</title>
+<title>**HacknPlan Integration**</title>
 <style>
 body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
        line-height: 1.55; color: #1a1a1a; max-width: 46em;
@@ -56,7 +56,68 @@ nav.toc .toc3 { padding-left: 1.2em; }
 </head>
 <body>
 <div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
-<h1 id="hackn-plan-integration">Hackn Plan Integration</h1>
-<p>HacknPlan Integration</p>
+<h1 id="hacknplan-integration"><strong>HacknPlan Integration</strong></h1>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc2"><a href="#hacknplan">**HacknPlan**</a></li>
+<li class="toc2"><a href="#authentication">**Authentication**</a></li>
+<li class="toc2"><a href="#host">**Host**</a></li>
+<li class="toc2"><a href="#project-setup-hacknplan-service">**Project setup (HacknPlan service)**</a></li>
+<li class="toc2"><a href="#where-the-position-is-stored">**Where the position is stored**</a></li>
+<li class="toc2"><a href="#integration-capabilities">**Integration capabilities**</a></li>
+<li class="toc2"><a href="#known-limitations">**Known limitations**</a></li>
+<li class="toc2"><a href="#project-setup-unreal-engine">**Project setup (Unreal Engine)**</a></li>
+</ul>
+</nav>
+<h2 id="hacknplan"><strong>HacknPlan</strong></h2>
+<p>HacknPlan is a project management service built for game development. It organises work into projects, each with a board of work items that can carry comments, attachments and subtasks. LadyBug Tracker reports bugs as work items in a single HacknPlan project.</p>
+<p>HacknPlan&#x27;s free plan has no user limit.</p>
+<h2 id="authentication"><strong>Authentication</strong></h2>
+<p>HacknPlan uses API keys. In the login window enter:</p>
+<ul>
+<li><strong>Api Key</strong> — a key generated in your HacknPlan account.</li>
+</ul>
+<p>To generate one, open <strong>Settings &gt; API</strong> in HacknPlan (https://app.hacknplan.com/settings?section=api) and create a key. The <strong>Create API Key</strong> button in the login window opens that page for you.</p>
+<p>The key has to be granted two scopes, or the plugin cannot list anything to work with:</p>
+<ul>
+<li><strong>Workspaces Read</strong></li>
+<li><strong>Projects Read</strong></li>
+</ul>
+<p>No user name is asked for: the key identifies the account on its own.</p>
+<h2 id="host"><strong>Host</strong></h2>
+<p>The host address is fixed to <strong>https://api.hacknplan.com</strong> and the plugin refuses anything else, saying so when the project is verified rather than failing later against an address that cannot answer. Note that this is the API address, not <code>app.hacknplan.com</code>, which is the web interface.</p>
+<h2 id="project-setup-hacknplan-service"><strong>Project setup (HacknPlan service)</strong></h2>
+<p>The plugin works against one HacknPlan <strong>project</strong>, and offers the projects your key can see. A project is only offered when both of these hold:</p>
+<ul>
+<li>it is <strong>not closed</strong> — a project with a closing date is left out;</li>
+<li>its <strong>Work Items module is enabled</strong> — the plugin reports bugs as work items, so a project without that module has nowhere to put them.</li>
+</ul>
+<p>A project missing from the list is almost always one of those two, and both are changed in HacknPlan&#x27;s own project settings. You can also let the plugin create a project for you.</p>
+<h2 id="where-the-position-is-stored"><strong>Where the position is stored</strong></h2>
+<p>Every reported bug carries the level it was reported from and the camera it was reported at. HacknPlan work items have no custom fields, so the plugin writes both into the <strong>work item description</strong> and reads them back from there. They travel with the description: editing it by hand in HacknPlan can lose them.</p>
+<h2 id="integration-capabilities"><strong>Integration capabilities</strong></h2>
+<ul>
+<li>Attachments can be added, viewed and deleted; they are fetched when an issue is opened rather than with the list.</li>
+<li>Comments can be added, viewed and deleted, and are fetched the same way.</li>
+<li>Subtasks are read and edited as a checklist, shown under the name <strong>Subtasks</strong>. A work item has one such list rather than several.</li>
+<li>Issues are downloaded 100 at a time, newest activity first.</li>
+</ul>
+<h2 id="known-limitations"><strong>Known limitations</strong></h2>
+<ul>
+<li><strong>Custom fields are not available.</strong> HacknPlan work items have no user-defined fields, which is why the level and camera live in the description.</li>
+<li><strong>Issue history is not available.</strong> The History tab stays empty.</li>
+<li><strong>Status transitions are not offered.</strong> The plugin sets the completed state directly rather than moving an item through a workflow.</li>
+<li>The free plan allows 500 MB of storage in total and 5 MB per file.</li>
+</ul>
+<h2 id="project-setup-unreal-engine"><strong>Project setup (Unreal Engine)</strong></h2>
+<p>Open <strong>Project Settings &gt; Plugins &gt; LadyBug Tracker</strong> and set:</p>
+<ol>
+<li><strong>Provider</strong> — HacknPlan.</li>
+<li><strong>Host</strong> — leave at https://api.hacknplan.com.</li>
+<li><strong>Change Login Settings</strong> — paste your API key.</li>
+<li><strong>Project</strong> — pick the project bugs should be reported to.</li>
+</ol>
+<p>These settings are stored in Config/DefaultBugTracker.ini and can be shared with the team. Your key is stored separately, per user, and only when <strong>Remember Me</strong> is enabled.</p>
 </body>
 </html>
