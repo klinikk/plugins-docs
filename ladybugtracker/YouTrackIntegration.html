@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You Track Integration</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc2 { padding-left: 0; font-weight: bold; }
+nav.toc .toc3 { padding-left: 1.2em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
+<h1 id="you-track-integration">You Track Integration</h1>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc2"><a href="#youtrack">YouTrack</a></li>
+<li class="toc3"><a href="#authentication">Authentication</a></li>
+<li class="toc3"><a href="#project-setup">Project setup</a></li>
+</ul>
+</nav>
+<p>YouTrack Integration</p>
+<h2 id="youtrack">YouTrack</h2>
+<p><em>“A project management tool that can be adapted to your processes to help you deliver great products. Track projects and tasks, use agile boards, plan sprints and releases, keep a knowledge base, work with reports and dashboards, and create workflows that follow your business processes. Never force your process to fit the limits of a tool again. Unlike other project management tools, YouTrack can be customized to your needs!”</em></p>
+<h3 id="authentication">Authentication</h3>
+<p>To log in from the plugin you need to generate a token first. Follow these steps to do this</p>
+<ol>
+<li>Open user profile</li>
+</ol>
+<img src="images/YouTrackIntegration/image8.png" alt="">
+<ol>
+<li>Navigate to the “Account Security” tab</li>
+</ol>
+<img src="images/YouTrackIntegration/image4.png" alt="">
+<ol>
+<li>Click “New Token”</li>
+</ol>
+<img src="images/YouTrackIntegration/image1.png" alt="">
+<ol>
+<li>Enter any name, and click “Create”</li>
+</ol>
+<img src="images/YouTrackIntegration/image5.png" alt="">
+<ol>
+<li>In the plugin use your username and token to login</li>
+</ol>
+<img src="images/YouTrackIntegration/image6.png" alt="">
+<h3 id="project-setup">Project setup</h3>
+<ol>
+<li>Open the project tab</li>
+</ol>
+<img src="images/YouTrackIntegration/image3.png" alt="">
+<ol>
+<li>Create a new project or select an existing one</li>
+</ol>
+<img src="images/YouTrackIntegration/image9.png" alt="">
+<ol>
+<li>Go to the “Fields” section</li>
+</ol>
+<img src="images/YouTrackIntegration/image2.png" alt="">
+<ol>
+<li>Add Camera and Level fields</li>
+</ol>
+<img src="images/YouTrackIntegration/image10.png" alt="">
+<img src="images/YouTrackIntegration/image7.png" alt="">
+</body>
+</html>

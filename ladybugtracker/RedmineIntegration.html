@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redmine Integration</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc2 { padding-left: 0; font-weight: bold; }
+nav.toc .toc3 { padding-left: 1.2em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
+<h1 id="redmine-integration">Redmine Integration</h1>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc2"><a href="#redmine">Redmine</a></li>
+<li class="toc2"><a href="#supported-versions">Supported Versions</a></li>
+<li class="toc2"><a href="#authentication">Authentication</a></li>
+<li class="toc2"><a href="#project-setup-redmine-service">Project setup (Redmine service)</a></li>
+<li class="toc2"><a href="#project-setup-unreal-engine">Project setup (Unreal Engine)</a></li>
+</ul>
+</nav>
+<p>Redmine Integration</p>
+<h2 id="redmine">Redmine</h2>
+<p>Redmine is an open-source project management and issue tracking software. It provides support for multiple projects, tasks, time tracking, and version control systems. It also allows for the creation of custom reports and integration with numerous other tools.</p>
+<h2 id="supported-versions">Supported Versions</h2>
+<p>The Redmine API evolves from version to version, therefore there is no guarantee that a plugin which worked on an older version will function correctly on a later one.</p>
+<p>Currently, the supported and only tested version is 4.x.</p>
+<p>Version 5.x should theoretically also work, however, this has not been tested.</p>
+<h2 id="authentication">Authentication</h2>
+<p>Redmine integration uses simple login password authentication</p>
+<img src="images/RedmineIntegration/image2.png" alt="">
+<h2 id="project-setup-redmine-service">Project setup (Redmine service)</h2>
+<p>LadyBug Tracker requires adding two custom fields to the project: &quot;Level&quot; and &quot;Camera&quot;. Both fields must be of type &quot;Text&quot;.</p>
+<p>To add these fields:</p>
+<ol>
+<li>Go to the Administration panel, then Custom Fields.</li>
+<li>Click on &quot;New Custom Field&quot; and select &quot;Issue&quot;, then click &quot;Next&quot;.</li>
+<li>Set the format to &quot;Text&quot; and the name to &quot;Level&quot;.</li>
+<li>Select the project to which this field should be added.</li>
+<li>Choose the appropriate Trackers. Most likely, you would want to use &quot;Bug&quot;.</li>
+<li>Click &quot;Create&quot;.</li>
+</ol>
+<p>Then, repeat these steps for the &quot;Camera&quot; field.</p>
+<img src="images/RedmineIntegration/image1.png" alt="">
+<h2 id="project-setup-unreal-engine">Project setup (Unreal Engine)</h2>
+<p>Due to limitations regarding the ability to fetch Custom Fields definitions from the server, only users with admin accounts can access this data. This information is crucial for the proper functioning of the entire plugin, therefore, these definitions should also be provided in the project settings (under the LadyBug Tracker - Redmine section).</p>
+<p>If you do not have admin rights, you must fill in this data manually. However, if you have an admin account, this data is automatically fetched from the server and saved in the project settings. These data are stored in project settings (Config/DefaultBugTracker.ini), allowing you to share them with the entire team.</p>
+<img src="images/RedmineIntegration/image3.png" alt="">
+<p>Unfortunately, not all data can be fetched even with an admin account.</p>
+<p>The User Role field (only for fields of type user) must always be filled in manually.</p>
+<p>The same goes for the Version Status field for fields of type Version.</p>
+</body>
+</html>

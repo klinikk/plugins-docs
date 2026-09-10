@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>**ClickUp Integration**</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc2 { padding-left: 0; font-weight: bold; }
+nav.toc .toc3 { padding-left: 1.2em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
+<h1 id="clickup-integration"><strong>ClickUp Integration</strong></h1>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc2"><a href="#clickup">**ClickUp**</a></li>
+<li class="toc2"><a href="#authentication">**Authentication**</a></li>
+<li class="toc2"><a href="#project-setup-clickup-service">**Project setup (ClickUp service)**</a></li>
+<li class="toc2"><a href="#free-plan-behaviour">**Free plan behaviour**</a></li>
+<li class="toc2"><a href="#task-status">**Task status**</a></li>
+<li class="toc2"><a href="#known-limitations">**Known limitations**</a></li>
+<li class="toc2"><a href="#project-setup-unreal-engine">**Project setup (Unreal Engine)**</a></li>
+</ul>
+</nav>
+<h2 id="clickup"><strong>ClickUp</strong></h2>
+<p>ClickUp is a project management and task tracking service. It organises work into workspaces (teams), spaces, folders and lists, and supports custom fields, checklists, comments and attachments. LadyBug Tracker reports bugs into a single ClickUp list.</p>
+<p>This integration is currently in the <strong>beta</strong> stage.</p>
+<h2 id="authentication"><strong>Authentication</strong></h2>
+<p>ClickUp uses personal API tokens. In the login window enter:</p>
+<ul>
+<li><strong>Username or Email</strong> — your ClickUp account.</li>
+<li><strong>API Token</strong> — a personal API token.</li>
+</ul>
+<p>To generate the token, open <strong>Settings &gt; Apps &gt; API Token</strong> in ClickUp (https://app.clickup.com/settings/apps), click to generate it, and copy it into the API Token field. The <strong>Generate API Token</strong> button in the login window opens that page for you.</p>
+<p>The host address is fixed to https://app.clickup.com and does not normally need changing.</p>
+<h2 id="project-setup-clickup-service"><strong>Project setup (ClickUp service)</strong></h2>
+<p>The plugin works against one ClickUp <strong>list</strong>. In the project settings:</p>
+<ul>
+<li><strong>Workspace</strong> selects the ClickUp team.</li>
+<li><strong>Project</strong> selects the list. Both folderless lists and lists inside a folder are found.</li>
+</ul>
+<p>LadyBug Tracker stores the position a bug was reported from in two custom fields, which have to exist on the list:</p>
+<ol>
+<li>Open the list, then <strong>Custom Fields</strong>.</li>
+<li>Create a field named <strong>Level</strong> of type <strong>Text</strong>.</li>
+<li>Create a field named <strong>Camera</strong> of type <strong>Text</strong>.</li>
+</ol>
+<p>The names must match exactly. If a field is missing, the plugin reports it when the project is verified, rather than failing silently.</p>
+<h2 id="free-plan-behaviour"><strong>Free plan behaviour</strong></h2>
+<p>A free ClickUp workspace runs out of custom field usages. When the plugin detects a free plan — or when ClickUp refuses a custom field write — it writes the Level and Camera values into the <strong>task description</strong> instead, so reporting keeps working without a paid plan. Custom fields are still read, so tasks created earlier under a paid plan stay complete.</p>
+<p>Because the values then live in the description, a task written that way can no longer have those values updated separately — they travel with the description.</p>
+<h2 id="task-status"><strong>Task status</strong></h2>
+<p>The completed state of a task is derived from the ClickUp status <em>type</em>: a task counts as completed when its status type is <strong>done</strong> or <strong>closed</strong>. The list therefore needs at least one open status and at least one done or closed status.</p>
+<h2 id="known-limitations"><strong>Known limitations</strong></h2>
+<ul>
+<li>The ClickUp API (v2) cannot delete attachments, so attachments can be added and viewed but not removed.</li>
+<li>Issue history is not available.</li>
+<li>Custom field usage on the free plan is limited — see Free plan behaviour above.</li>
+</ul>
+<h2 id="project-setup-unreal-engine"><strong>Project setup (Unreal Engine)</strong></h2>
+<p>Open <strong>Project Settings &gt; Plugins &gt; LadyBug Tracker</strong> and set:</p>
+<ol>
+<li><strong>Provider</strong> — ClickUp.</li>
+<li><strong>Host</strong> — leave at https://app.clickup.com.</li>
+<li><strong>Change Login Settings</strong> — enter your account and API token.</li>
+<li><strong>Workspace</strong> — pick your ClickUp team.</li>
+<li><strong>Project</strong> — pick the list bugs should be reported to.</li>
+</ol>
+<p>These settings are stored in Config/DefaultBugTracker.ini and can be shared with the team. Your login and token are stored separately, per user, and only when <strong>Remember Me</strong> is enabled.</p>
+</body>
+</html>

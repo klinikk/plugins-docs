@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>**Notion Integration**</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc2 { padding-left: 0; font-weight: bold; }
+nav.toc .toc3 { padding-left: 1.2em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
+<h1 id="notion-integration"><strong>Notion Integration</strong></h1>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc2"><a href="#notion">**Notion**</a></li>
+<li class="toc2"><a href="#authentication">**Authentication**</a></li>
+<li class="toc2"><a href="#project-setup-notion-service">**Project setup (Notion service)**</a></li>
+<li class="toc2"><a href="#integration-capabilities">**Integration capabilities**</a></li>
+<li class="toc2"><a href="#attachments">**Attachments**</a></li>
+<li class="toc2"><a href="#subtasks">**Subtasks**</a></li>
+<li class="toc2"><a href="#known-limitations">**Known limitations**</a></li>
+<li class="toc2"><a href="#project-setup-unreal-engine">**Project setup (Unreal Engine)**</a></li>
+</ul>
+</nav>
+<h2 id="notion"><strong>Notion</strong></h2>
+<p>Notion is a workspace and documentation service whose databases can be used as an issue tracker. LadyBug Tracker treats a Notion <strong>database</strong> as the project and each <strong>page</strong> inside it as an issue.</p>
+<p>This integration is currently in the <strong>beta</strong> stage.</p>
+<h2 id="authentication"><strong>Authentication</strong></h2>
+<p>Notion does not use a user name and password. It authenticates with an <strong>internal integration secret</strong>:</p>
+<ol>
+<li>Go to https://www.notion.so/my-integrations and create a new internal integration. The **Create Integration** button in the login window opens that page.</li>
+<li>Copy its secret into the <strong>Internal Integration Secret</strong> field in the login window.</li>
+<li>Open the database you want to use, and <strong>share it with that integration</strong> (Share menu &gt; select your integration).</li>
+</ol>
+<p>Step 3 is essential. Until the database is shared with the integration it is invisible to the API, and Notion reports it as <em>not found</em> rather than as forbidden — so a missing share looks like a wrong database name.</p>
+<p>The host address is fixed to https://www.notion.so. The integration secret is already scoped to one workspace.</p>
+<h2 id="project-setup-notion-service"><strong>Project setup (Notion service)</strong></h2>
+<p><strong>Project</strong> selects the database by its title.</p>
+<p>Notion database properties are user defined, so the plugin matches them to its own fields <strong>by name and type</strong>. Properties that are missing are simply not offered as fields, and the project verification reports which ones were not found instead of failing. The mapping is:</p>
+<table>
+<tr><th><strong>Notion property</strong></th><th><strong>Type</strong></th><th><strong>Plugin field</strong></th></tr>
+<tr><td>title property</td><td>title</td><td>Summary</td></tr>
+<tr><td>Description</td><td>text</td><td>Description</td></tr>
+<tr><td>Status</td><td>status or select</td><td>Status</td></tr>
+<tr><td>Priority</td><td>select</td><td>Priority</td></tr>
+<tr><td>Assignee</td><td>people</td><td>Assignee</td></tr>
+<tr><td>Due Date</td><td>date</td><td>Due Date</td></tr>
+<tr><td>Level</td><td>text</td><td>Level</td></tr>
+<tr><td>Camera</td><td>text</td><td>Camera</td></tr>
+</table>
+<p><strong>Level</strong> and <strong>Camera</strong> are the two properties LadyBug Tracker uses to store where a bug was reported from; add them as <strong>Text</strong> properties for 3D markers and the Goto button to work.</p>
+<p>Created and Updated come from the page&#x27;s own timestamps and are always available.</p>
+<h2 id="integration-capabilities"><strong>Integration capabilities</strong></h2>
+<p>Notion never reports which capabilities an integration was granted, so the plugin probes them and shows the result in the settings window.</p>
+<p><strong>Comment reading is off by default in Notion.</strong> Without it the plugin skips reading comments rather than failing the whole fetch, so fields and attachments still load. To enable it, open the integration at notion.so/my-integrations and grant the read comments capability.</p>
+<h2 id="attachments"><strong>Attachments</strong></h2>
+<p>Attachments are stored as blocks in the page body (image, video, audio, pdf or file), not in a files property. Appending never rewrites existing blocks, so a concurrent edit cannot drop earlier attachments.</p>
+<p>Free Notion workspaces reject a file larger than <strong>5 MB</strong>. Consider setting <strong>Max Screenshot Size</strong> in the project settings so large captures are downscaled before upload.</p>
+<h2 id="subtasks"><strong>Subtasks</strong></h2>
+<p>The subtask checklist is built from the to-do blocks of the page body. A Notion page has no checklist container, so all of its to-do items form a single checklist named <em>Subtasks</em>. Items can be added, renamed, ticked and removed; the checklist itself cannot be created or deleted.</p>
+<h2 id="known-limitations"><strong>Known limitations</strong></h2>
+<ul>
+<li>Comments can be created and read, but the Notion API cannot delete them.</li>
+<li>Issue history and workflow status transitions are not supported.</li>
+<li>Creating a new database from the plugin is not possible, because the API cannot choose a parent page. Create the database in Notion first.</li>
+<li>Deleting an issue archives the page, which is what Notion exposes instead of a hard delete.</li>
+<li>A plain <strong>select</strong> property carries no completion information; use a <strong>status</strong> property if completion state matters.</li>
+</ul>
+<h2 id="project-setup-unreal-engine"><strong>Project setup (Unreal Engine)</strong></h2>
+<p>Open <strong>Project Settings &gt; Plugins &gt; LadyBug Tracker</strong> and set:</p>
+<ol>
+<li><strong>Provider</strong> — Notion.</li>
+<li><strong>Host</strong> — leave at https://www.notion.so.</li>
+<li><strong>Change Login Settings</strong> — paste the internal integration secret.</li>
+<li><strong>Project</strong> — pick the database you shared with the integration.</li>
+</ol>
+<p>These settings are stored in Config/DefaultBugTracker.ini and can be shared with the team. The integration secret is stored separately, per user, and only when <strong>Remember Me</strong> is enabled.</p>
+</body>
+</html>

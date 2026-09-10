@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mantis Integration</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc2 { padding-left: 0; font-weight: bold; }
+nav.toc .toc3 { padding-left: 1.2em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
+<h1 id="mantis-integration">Mantis Integration</h1>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc2"><a href="#mantis-bug-tracker">Mantis Bug Tracker</a></li>
+<li class="toc2"><a href="#mantishub">MantisHub</a></li>
+<li class="toc3"><a href="#authentication">Authentication</a></li>
+<li class="toc3"><a href="#server-setup">Server Setup</a></li>
+<li class="toc3"><a href="#enable-soap-api-on-the-server-if-is-not-activated">Enable SOAP API on the server if is not activated</a></li>
+<li class="toc3"><a href="#project-setup">Project setup</a></li>
+</ul>
+</nav>
+<p>Mantis Integration</p>
+<h2 id="mantis-bug-tracker">Mantis Bug Tracker</h2>
+<p><em>“MantisBT makes collaboration with team members &amp; clients easy, fast, and professional</em></p>
+<p><em>MantisBT is an open-source issue tracker that provides a delicate balance between simplicity and power. Users are able to get started in minutes and start managing their projects while collaborating with their teammates and clients effectively. Once you start using it, you will never go back!”</em></p>
+<h2 id="mantishub">MantisHub</h2>
+<p><em>“Track your issues with our simple, intuitive interface. Split your issues into categories and move them through your issues life-cycle. Search them, auto-assign them to your developers, attach files, tag them, ping your teammates and customize your system. All this and more with the well-known Mantis brand”</em></p>
+<h3 id="authentication">Authentication</h3>
+<img src="images/MantisIntegration/image2.png" alt="">
+<p>Using token instead of password is always better chose. To generate token follow these steps:</p>
+<ol>
+<li>Open My Profil page</li>
+</ol>
+<img src="images/MantisIntegration/image1.png" alt="">
+<ol>
+<li>Navigate to API token section and select Create API Token</li>
+</ol>
+<img src="images/MantisIntegration/image3.png" alt="">
+<p>3 Use a generated token to login</p>
+<img src="images/MantisIntegration/image4.png" alt="">
+<h3 id="server-setup">Server Setup</h3>
+<h3 id="enable-soap-api-on-the-server-if-is-not-activated">Enable SOAP API on the server if is not activated</h3>
+<p>https://mantisbt.org/docs/master-1.3.x/en-US/Admin_Guide/html/admin.config.soap.html</p>
+<h3 id="project-setup">Project setup</h3>
+<p>LadyBug Tracker required to add two custom fields Camera and Level. Information about how to add the custom fields is available <a href="https://support.mantishub.com/hc/en-us/articles/204274065-Adding-custom-fields">here</a></p>
+</body>
+</html>

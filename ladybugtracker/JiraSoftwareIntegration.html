@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jira Software Integration</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc2 { padding-left: 0; font-weight: bold; }
+nav.toc .toc3 { padding-left: 1.2em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
+<h1 id="jira-software-integration">Jira Software Integration</h1>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc2"><a href="#jira-software-integration">Jira Software Integration</a></li>
+<li class="toc3"><a href="#authentication">Authentication</a></li>
+<li class="toc3"><a href="#setup-project">Setup project</a></li>
+</ul>
+</nav>
+<h2 id="jira-software-integration">Jira Software Integration</h2>
+<p>Jira Software is a powerful platform that combines issue collection and agile project management capabilities into a single application. Using Jira Software helps you plan and organize tasks, workflows, and reports for your agile team more efficiently.</p>
+<h3 id="authentication">Authentication</h3>
+<ol>
+<li>In the plugin Open the login settings window. Then click “Create Token” <img src="images/JiraSoftwareIntegration/image7.png" alt=""></li>
+<li>You should be redirected to your Jira account page. Click “Create API token” <img src="images/JiraSoftwareIntegration/image4.png" alt=""></li>
+<li>Enter the token name and click “Create” to create a token <img src="images/JiraSoftwareIntegration/image9.png" alt=""></li>
+<li>Copy the token to the clipboard <img src="images/JiraSoftwareIntegration/image6.png" alt=""></li>
+<li>Enter your login and past token from the clipboard. Then click “Login”. <img src="images/JiraSoftwareIntegration/image3.png" alt=""></li>
+</ol>
+<h3 id="setup-project">Setup project</h3>
+<p>The easiest way to set up a project is to use the &quot;Bug Tracking&quot; template.</p>
+<ol>
+<li>Go to create a project page <img src="images/JiraSoftwareIntegration/image2.png" alt=""></li>
+<li>Select “Software development” category <img src="images/JiraSoftwareIntegration/image1.png" alt=""></li>
+<li>Select “Bug tracking template <img src="images/JiraSoftwareIntegration/image8.png" alt=""></li>
+<li>Enter a project name and key and then click “Create Project” <img src="images/JiraSoftwareIntegration/image5.png" alt=""></li>
+<li>Add custom fields to the project. The fields should be named &quot;Camera&quot; and &quot;Level&quot; and should be of type &quot;Short text&quot;. Adding new custom fields is not an easy process in Jira. Please read the Jira documentation to learn how to do that. These fields are mandatory to enable all the features of the plugin. <a href="https://confluence.atlassian.com/adminjiraserver/adding-custom-fields-1047552713.html">https://confluence.atlassian.com/adminjiraserver/adding-custom-fields-1047552713.html</a></li>
+</ol>
+</body>
+</html>
