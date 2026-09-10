@@ -22,6 +22,9 @@ table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
 th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
          vertical-align: top; }
 th { background: #eef3f7; }
+td.yes { background: #e3f3e6; color: #14622b; }
+td.no  { background: #fbe6e4; color: #8c1d18; }
+sup { font-size: 0.7em; line-height: 0; vertical-align: super; }
 code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
        background: #f3f3f3; padding: 1px 4px; }
 a { color: #10559a; }
@@ -43,7 +46,11 @@ nav.toc .toc3 { padding-left: 1.2em; }
 @media print {
   /* A screenshot split across a page break is worse than a short page, and a
      heading stranded at the foot of one is worse still. */
-  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  /* A browser drops background colours when printing unless told not to, and
+     the comparison table is the one place here where the colour is the
+     content: without it every cell prints the same shade of nothing. */
+  body { margin: 0; max-width: none; font-size: 10.5pt;
+         print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
   img, table, tr { break-inside: avoid; page-break-inside: avoid; }
   h1 { break-before: page; page-break-before: page; }
@@ -56,7 +63,6 @@ nav.toc .toc3 { padding-left: 1.2em; }
 </head>
 <body>
 <div class="home"><a href="index.html">&#8592; LadyBugTracker</a></div>
-<h1 id="getting-started">Getting Started</h1>
 <nav class="toc">
 <h2>Contents</h2>
 <ul>
@@ -70,6 +76,7 @@ nav.toc .toc3 { padding-left: 1.2em; }
 <li class="toc1"><a href="#reporting-automations">Reporting Automations</a></li>
 </ul>
 </nav>
+<h1 id="getting-started">Getting Started</h1>
 <p>LadyBug Tracker</p>
 <p>___________________________________</p>
 <p>Tutorial</p>

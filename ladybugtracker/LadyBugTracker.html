@@ -22,6 +22,9 @@ table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
 th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
          vertical-align: top; }
 th { background: #eef3f7; }
+td.yes { background: #e3f3e6; color: #14622b; }
+td.no  { background: #fbe6e4; color: #8c1d18; }
+sup { font-size: 0.7em; line-height: 0; vertical-align: super; }
 code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
        background: #f3f3f3; padding: 1px 4px; }
 a { color: #10559a; }
@@ -43,7 +46,11 @@ nav.toc .toc3 { padding-left: 1.2em; }
 @media print {
   /* A screenshot split across a page break is worse than a short page, and a
      heading stranded at the foot of one is worse still. */
-  body { margin: 0; max-width: none; font-size: 10.5pt; }
+  /* A browser drops background colours when printing unless told not to, and
+     the comparison table is the one place here where the colour is the
+     content: without it every cell prints the same shade of nothing. */
+  body { margin: 0; max-width: none; font-size: 10.5pt;
+         print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
   img, table, tr { break-inside: avoid; page-break-inside: avoid; }
   h1 { break-before: page; page-break-before: page; }
@@ -56,6 +63,9 @@ nav.toc .toc3 { padding-left: 1.2em; }
 </head>
 <body>
 <h1 id="ladybug-tracker">LadyBug Tracker</h1>
+<img src="images/LadyBugTracker/banner.png" alt="">
+<p>Author: <strong>Tomasz Klin</strong></p>
+<p>Version: <strong>3.0.2</strong></p>
 <nav class="toc">
 <h2>Contents</h2>
 <ul>
@@ -111,9 +121,6 @@ nav.toc .toc3 { padding-left: 1.2em; }
 <li class="toc3"><a href="#example-6---get-field-values">Example 6 - Get field values</a></li>
 </ul>
 </nav>
-<img src="images/LadyBugTracker/image7.png" alt="">
-<p>Author: <strong>Tomasz Klin</strong></p>
-<p>Version: <strong>3.0</strong></p>
 <h1 id="introduction">Introduction</h1>
 <p>LadyBug Tracker is a plugin that integrates bug tracker systems with the UnrealEngine. Thanks to this plugin you will significantly increase the efficiency and convenience of your work. Forget about constant switching between the Unreal Engine editor and the browser with an open bug tracker page. Conveniently view and edit details of reported issues. Browse the issues directly in the level viewport. Report a bug straight from the editor and game. Create blueprints that automate reporting bugs for you.</p>
 <h1 id="data-storage-and-privacy">Data Storage and Privacy</h1>
@@ -225,30 +232,31 @@ nav.toc .toc3 { padding-left: 1.2em; }
 <h2 id="integrations-comparison">Integrations comparison</h2>
 <table>
 <tr><th></th><th>YouTrack</th><th>Trello</th><th>Jira Software</th><th>Jira Server</th><th>Mantis</th><th>MantisHub</th><th>Asana</th><th>HacknPlan</th><th>Redmine</th><th>ClickUp</th><th>Notion</th></tr>
-<tr><td>View issues</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Edit issues</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Report issues</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Custom fields</td><td>Yes</td><td>Yes1</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes1</td><td>No2</td><td>Yes</td><td>Yes1</td><td>Yes</td></tr>
-<tr><td>Sorting by columns</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Filtering</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>3D Markers</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>View attachments</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Add attachments</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Delete attachments</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No2</td><td>Yes</td></tr>
-<tr><td>View comments</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Add comment</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Delete comment</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No2</td></tr>
-<tr><td>View checklists (subtasks)</td><td>No2</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Edit checklists (subtasks)</td><td>No2</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr>
-<tr><td>Create project</td><td>No2</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>No2</td></tr>
-<tr><td>View history</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
-<tr><td>Free version users</td><td>10</td><td>15</td><td>10</td><td>-</td><td>unlimited</td><td>0</td><td>10</td><td>unlimited</td><td>unlimited</td><td>unlimited</td><td>unlimited4</td></tr>
+<tr><td>View issues</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Edit issues</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Report issues</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Custom fields</td><td class="yes">Yes</td><td class="yes">Yes<sup>1</sup></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes<sup>1</sup></td><td class="no">No<sup>2</sup></td><td class="yes">Yes</td><td class="yes">Yes<sup>1</sup></td><td class="yes">Yes</td></tr>
+<tr><td>Sorting by columns</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Filtering</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>3D Markers</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>View attachments</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Add attachments</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Delete attachments</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No<sup>2</sup></td><td class="yes">Yes</td></tr>
+<tr><td>View comments</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Add comment</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Delete comment</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No<sup>2</sup></td></tr>
+<tr><td>View checklists (subtasks)</td><td class="no">No<sup>2</sup></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Edit checklists (subtasks)</td><td class="no">No<sup>2</sup></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Create project</td><td class="no">No<sup>2</sup></td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No<sup>2</sup></td></tr>
+<tr><td>View history</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+<tr><td>Free version users</td><td>10</td><td>15</td><td>10</td><td>-</td><td>unlimited</td><td>0</td><td>10</td><td>unlimited</td><td>unlimited</td><td>unlimited</td><td>unlimited<sup>4</sup></td></tr>
 <tr><td>Free version storagetotal/per file</td><td>30 GB / 500 MB</td><td>unlimited / 10 MB</td><td>2 GB / 2GB</td><td>-</td><td>unlimited / unlimited</td><td>0 / 0</td><td>unlimited / 25MB</td><td>500 MB / 5 MB</td><td>unlimited / unlimited</td><td>1 GB / 100 MB</td><td>unlimited / 5 MB</td></tr>
 <tr><td>Free version projects</td><td>unlimited</td><td>10</td><td>unlimited</td><td>-</td><td>unlimited</td><td>0</td><td>unlimited</td><td>unlimited</td><td>unlimited</td><td>unlimited lists (max 5 Spaces)</td><td>unlimited</td></tr>
 </table>
-<p>1- Available in service paid version</p>
-<p>2 - Feature not provided by service</p>
-<p>3 - Not yet implemented 4 - Notion applies a 1,000-block limit once a workspace has more than one membe</p>
+<p><sup>1</sup> Available in the paid version of the service</p>
+<p><sup>2</sup> Feature not provided by the service</p>
+<p><sup>3</sup> Not yet implemented</p>
+<p><sup>4</sup> Notion applies a 1,000-block limit once a workspace has more than one member</p>
 <h1 id="getting-started">Getting Started</h1>
 <h2 id="enabling-plugin">Enabling Plugin</h2>
 <p>In order to enable the plugin to go to Edit -&gt; Plugins, select <strong>Bug Tracker</strong> category and check <strong>Enabled</strong> for LadyBug Tracker</p>
