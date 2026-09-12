@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editor Web Browser</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+img.banner { border: 0; margin: 1.2em 0 0.9em; }
+p.byline { font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt;
+           color: #444; margin: 0 0 0.4em; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+td.yes { background: #e3f3e6; color: #14622b; }
+td.no  { background: #fbe6e4; color: #8c1d18; }
+sup { font-size: 0.7em; line-height: 0; vertical-align: super; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc1 { padding-left: 0; font-weight: bold; }
+nav.toc .toc2 { padding-left: 1.2em; }
+nav.toc .toc3 { padding-left: 2.4em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  /* A browser drops background colours when printing unless told not to, and
+     the comparison table is the one place here where the colour is the
+     content: without it every cell prints the same shade of nothing. */
+  body { margin: 0; max-width: none; font-size: 10.5pt;
+         print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<h1 id="editor-web-browser">Editor Web Browser</h1>
+<img class="banner" src="images/EditorWebBrowser/banner.png" alt="Editor Web Browser">
+<p class="byline">Author: <strong>Tomasz Klin</strong><br>Version: <strong>1.5.1</strong></p>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc1"><a href="#what-it-is">What it is</a></li>
+<li class="toc1"><a href="#how-to-install">How to install</a></li>
+<li class="toc1"><a href="#how-to-use">How to use</a></li>
+<li class="toc2"><a href="#opening-a-browser">Opening a browser</a></li>
+<li class="toc2"><a href="#the-toolbar">The toolbar</a></li>
+<li class="toc2"><a href="#favourites-and-history">Favourites and history</a></li>
+<li class="toc2"><a href="#staying-signed-in">Staying signed in</a></li>
+<li class="toc2"><a href="#capture-editor-shortcuts">Capture Editor Shortcuts</a></li>
+</ul>
+</nav>
+<h1 id="what-it-is">What it is</h1>
+<p>Editor Web Browser puts a web browser inside the Unreal Editor, as an ordinary tab you can dock, float and arrange like any other. Up to four browsers can be open at once, and they remember your session: a site you signed into today is still signed in tomorrow, after the editor has been closed and reopened.</p>
+<h1 id="how-to-install">How to install</h1>
+<ol>
+<li>Install the plugin into your engine version from the store. <img src="images/EditorWebBrowser/image3.png" alt=""></li>
+<li>Open your project and enable the plugin. Go to <strong>Edit -&gt; Plugins</strong>, select the <strong>Other</strong> category, and then check <strong>Enabled</strong> for Editor Web Browser. <img src="images/EditorWebBrowser/image4.png" alt=""></li>
+<li>Restart the editor.</li>
+</ol>
+<h1 id="how-to-use">How to use</h1>
+<h2 id="opening-a-browser">Opening a browser</h2>
+<p>Open a browser from <strong>Tools -&gt; Web Browser</strong>. Four are available, <strong>Web Browser 1</strong> through <strong>Web Browser 4</strong>.</p>
+<img src="images/EditorWebBrowser/image2.png" alt="">
+<p>Each one is a normal editor tab: dock it beside the viewport, drag it onto a second monitor, or leave it floating, and the editor layout remembers where you put it. With a single browser open the tab is simply called <strong>Web Browser</strong> — the numbers appear only once a second one is open, so there is nothing to think about until you need it.</p>
+<p>All four share one browsing session, so a site you sign into in one is signed in in the others.</p>
+<h2 id="the-toolbar">The toolbar</h2>
+<img src="images/EditorWebBrowser/image5.png" alt="">
+<p>From the left: <strong>back</strong> and <strong>forward</strong> through the pages you have visited, <strong>home</strong> to return to your homepage, and <strong>reload</strong>, which turns into a stop button while a page is still loading. Then the address bar — type a URL and press Enter to go there.</p>
+<p>The <strong>star</strong> on the right of the address bar adds the current page to your favourites, and removes it again if it is already there.</p>
+<h2 id="favourites-and-history">Favourites and history</h2>
+<p>The menu button at the far right of the toolbar opens the rest:</p>
+<ul>
+<li><strong>Favorite</strong> lists the pages you have starred. Pick one to go to it.</li>
+<li><strong>History</strong> lists the pages you have visited most recently, with <strong>Clear History</strong> at the bottom to empty the list.</li>
+<li><strong>Open in System Browser</strong> hands the current page to your normal desktop browser.</li>
+<li><strong>Set As Homepage</strong> makes the current page the one the home button goes to.</li>
+<li><strong>Capture Editor Shortcuts</strong> decides who gets your keystrokes — see below.</li>
+</ul>
+<p>Favourites and history are saved as you go, and are there the next time you open the editor.</p>
+<h2 id="staying-signed-in">Staying signed in</h2>
+<p>The browser keeps its cookies between sessions. Sign into a wiki, a task tracker, a documentation site or your own web tools once, and you stay signed in across editor restarts — which is the difference between this and keeping a separate browser window next to the editor.</p>
+<p>The session is stored outside your project, so it is not something that can end up in your project&#x27;s source control.</p>
+<h2 id="capture-editor-shortcuts">Capture Editor Shortcuts</h2>
+<p>While you are typing into a web page, a keystroke like <strong>Ctrl+S</strong> is ambiguous: the page may want it, and so may the editor. <strong>Capture Editor Shortcuts</strong>, in the toolbar menu, decides which one wins.</p>
+<table>
+<tr><th>Setting</th><th>What happens</th></tr>
+<tr><td>On (default)</td><td>The page receives the keystroke. Editor shortcuts do not fire while you are using the browser.</td></tr>
+<tr><td>Off</td><td>The editor&#x27;s shortcuts keep working, and the page only receives keys the editor does not claim.</td></tr>
+</table>
+<p>Leave it on if you use web applications in the browser; turn it off if you mostly read pages and would rather keep your editor shortcuts to hand.</p>
+</body>
+</html>
