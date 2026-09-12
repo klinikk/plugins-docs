@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Component Timeline</title>
+<style>
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt;
+       line-height: 1.55; color: #1a1a1a; max-width: 46em;
+       margin: 3em auto; padding: 0 1.5em; }
+h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; line-height: 1.25;
+                 color: #0b3d59; margin: 1.6em 0 0.5em; }
+h1 { font-size: 22pt; border-bottom: 2px solid #0b3d59; padding-bottom: 0.25em; }
+h2 { font-size: 16pt; }
+h3 { font-size: 13pt; }
+h4 { font-size: 11.5pt; }
+p { margin: 0.7em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1.2em auto;
+      border: 1px solid #d8d8d8; }
+img.banner { border: 0; margin: 1.2em 0 0.9em; }
+p.byline { font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt;
+           color: #444; margin: 0 0 0.4em; }
+table { border-collapse: collapse; margin: 1.2em 0; font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif; }
+th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left;
+         vertical-align: top; }
+th { background: #eef3f7; }
+td.yes { background: #e3f3e6; color: #14622b; }
+td.no  { background: #fbe6e4; color: #8c1d18; }
+sup { font-size: 0.7em; line-height: 0; vertical-align: super; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt;
+       background: #f3f3f3; padding: 1px 4px; }
+a { color: #10559a; }
+ul, ol { margin: 0.7em 0; padding-left: 1.6em; }
+li { margin: 0.25em 0; }
+nav.toc { margin: 1.5em 0 2.5em; padding: 0.5em 0 1em; border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd; font-family: Arial, Helvetica, sans-serif;
+          font-size: 10pt; }
+nav.toc h2 { font-size: 12pt; margin: 0.6em 0 0.4em; }
+nav.toc ul { list-style: none; padding-left: 0; margin: 0; column-count: 2;
+             column-gap: 2.5em; }
+nav.toc li { margin: 0.15em 0; break-inside: avoid; }
+nav.toc a { text-decoration: none; }
+nav.toc .toc1 { padding-left: 0; font-weight: bold; }
+nav.toc .toc2 { padding-left: 1.2em; }
+nav.toc .toc3 { padding-left: 2.4em; }
+.home { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;
+        margin-bottom: 1.5em; }
+
+@media print {
+  /* A screenshot split across a page break is worse than a short page, and a
+     heading stranded at the foot of one is worse still. */
+  /* A browser drops background colours when printing unless told not to, and
+     the comparison table is the one place here where the colour is the
+     content: without it every cell prints the same shade of nothing. */
+  body { margin: 0; max-width: none; font-size: 10.5pt;
+         print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  img, table, tr { break-inside: avoid; page-break-inside: avoid; }
+  h1 { break-before: page; page-break-before: page; }
+  h1:first-of-type { break-before: auto; page-break-before: auto; }
+  a { color: #10559a; text-decoration: none; }
+  .home { display: none; }
+}
+@page { margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<h1 id="component-timeline">Component Timeline</h1>
+<img class="banner" src="images/ComponentTimeline/banner.png" alt="Component Timeline">
+<p class="byline">Author: <strong>Tomasz Klin</strong><br>Version: <strong>1.2.1</strong></p>
+<nav class="toc">
+<h2>Contents</h2>
+<ul>
+<li class="toc1"><a href="#enabling-plugin">Enabling Plugin</a></li>
+<li class="toc1"><a href="#adding-timeline-node">Adding Timeline node</a></li>
+<li class="toc1"><a href="#initializing-timelines-very-important">Initializing Timelines (Very Important!!!)</a></li>
+<li class="toc1"><a href="#inputs-and-outputs">Inputs and Outputs</a></li>
+<li class="toc1"><a href="#timeline-in-other-blueprints-experimental">Timeline in other blueprints (experimental)</a></li>
+<li class="toc2"><a href="#how-does-it-work">How does it work?</a></li>
+<li class="toc2"><a href="#enable-timelines-in-all-blueprints">Enable timelines in all blueprints</a></li>
+<li class="toc2"><a href="#how-to-use-it">How to use it?</a></li>
+</ul>
+</nav>
+<h1 id="enabling-plugin">Enabling Plugin</h1>
+<p>In order to enable the plugin go to Edit -&gt; Plugins, select <strong>Blueprints</strong> category, and check <strong>Enabled</strong> for Component Timeline</p>
+<img src="images/ComponentTimeline/image2.png" alt="Component Timeline enabled in the Blueprints category of the Plugins window">
+<h1 id="adding-timeline-node">Adding Timeline node</h1>
+<p>Right-click in a component blueprint and type Add Component Timeline</p>
+<img src="images/ComponentTimeline/image3.png" alt="Adding a Component Timeline node from the blueprint context menu">
+<h1 id="initializing-timelines-very-important">Initializing Timelines (Very Important!!!)</h1>
+<p>To ensure that your timelines function properly, they must be initialized at the beginning of your component&#x27;s operation. Without initialization, the timelines will not work as intended. To initialize your component timelines, call &quot;Initialize Component Timelines&quot; during Begin Play.</p>
+<img src="images/ComponentTimeline/image5.png" alt="Initialize Component Timelines called from the component&#x27;s Begin Play">
+<p>Component timeline node</p>
+<img src="images/ComponentTimeline/image4.png" alt="A Component Timeline node with its input and output pins">
+<p><strong>Component Timeline nodes</strong> are special nodes within Blueprints that provide time-based animation to be quickly designed and played back based on <strong>events</strong>, <strong>floats</strong>, <strong>vectors</strong>, or <strong>colors</strong> that can be triggered at keyframes along the timeline.</p>
+<p>Timelines can be edited directly inside the Blueprint editor by <strong>Double-clicking</strong> on the Timeline in the Graph tab or in the My Blueprint tab. They are specifically built for handling simple, non-cinematic tasks such as opening doors, altering lights, or performing other time-centric manipulations to Actors within a scene. They are similar to <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/sequencer-cinematic-editor-unreal-engine">level sequences</a> as they both provide values such as floats, vectors, and colors to be interpolated between keyframes along the timeline.</p>
+<h1 id="inputs-and-outputs">Inputs and Outputs</h1>
+<p>Timelines come with the following input and output pins:</p>
+<p><strong>Input Pins</strong></p>
+<table>
+<tr><th><strong>Item</strong></th><th><strong>Description</strong></th></tr>
+<tr><td><strong>Play</strong></td><td>Causes the Timeline to play forward from its current time.</td></tr>
+<tr><td><strong>Play from Start</strong></td><td>Causes the Timeline to play forward from the beginning.</td></tr>
+<tr><td><strong>Stop</strong></td><td>Freezes the playback of the Timeline at the current time.</td></tr>
+<tr><td><strong>Reverse</strong></td><td>Plays the Timeline backwards from its current time.</td></tr>
+<tr><td><strong>Reverse from End</strong></td><td>Plays the Timeline backwards starting from the end.</td></tr>
+<tr><td><strong>Set New Time</strong></td><td>Sets the current time to the value set (or input) in the New Time input.</td></tr>
+<tr><td><strong>New Time</strong></td><td>This data pin takes a float value representing time in seconds, to which the Timeline can jump when the Set New Time input is called.</td></tr>
+</table>
+<p><strong>Output Pins</strong></p>
+<table>
+<tr><th><strong>Item</strong></th><th><strong>Description</strong></th></tr>
+<tr><td><strong>Update</strong></td><td>Outputs an execution signal as soon as the Timeline is called.</td></tr>
+<tr><td><strong>Finished</strong></td><td>Outputs an execution signal when playback ends. This is not triggered by the Stop function.</td></tr>
+<tr><td><strong>Direction</strong></td><td>Outputs enum data indicating the direction the Timeline is playing.</td></tr>
+</table>
+<p>Timelines may have any number of additional output data pins reflecting the types of tracks created within them. These include Float, Vector, and Event tracks.</p>
+<h1 id="timeline-in-other-blueprints-experimental">Timeline in other blueprints (experimental)</h1>
+<p><strong>This is an experimental feature</strong>, added at the request of one of the users. I have made every effort to make it work well, but I am not able to anticipate all use cases. It should not be used if one does not understand all the limitations it imposes.</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>The timeline functionality is implemented by the TimelineComponent, so in order to use it, we need an actor for which we can create the component.</p>
+<p>The lifespan of the blueprint in which we place the timeline and the actor that manages it should be related. For example, timelines used in widgets on the screen can be linked to the HUD, which is an actor.</p>
+<p>It is also not a good practice to use PlayerPawn as a solution for everything. In most cases, it will work, but it will create a lot of clutter in the PlayerPawn.</p>
+<h2 id="enable-timelines-in-all-blueprints">Enable timelines in all blueprints</h2>
+<p>By default, this functionality is disabled. To enable it, you need to check the &quot;Enable timelines in all blueprints&quot; option in Project settings, under Plugins -&gt; Component Timeline.</p>
+<img src="images/ComponentTimeline/image1.png" alt="The Enable timelines in all blueprints option in Project settings">
+<p>The option only takes effect after the editor is restarted, so restart it before looking for the node.</p>
+<h2 id="how-to-use-it">How to use it?</h2>
+<p>To use the timeline functionality, you can insert a timeline into a blueprint as usual. Then, you can initialize the timelines in the blueprint&#x27;s event that begins blueprint work (e.g. BeginPlay/Construct) using the &quot;Initialize Timelines&quot; node. Give that node the actor that is to own the timelines - the one whose lifespan the blueprint&#x27;s own follows.</p>
+<img src="images/ComponentTimeline/image6.png" alt="Initialize Timelines called with the owning actor">
+</body>
+</html>
